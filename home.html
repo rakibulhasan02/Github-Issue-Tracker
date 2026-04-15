@@ -24,33 +24,35 @@
 
 </head>
 <body>
-    <!-- login section -->
+   
+    <!-- navbar section -->
+     <section>
 
-    <section  class="card bg-base-100 w-full max-w-sm shrink-0 shadow mx-auto rounded-2xl border border-primary p-5 mt-10">
+        <div class="navbar bg-base-100 shadow-sm">
+  <div class="flex-1">
 
-        <!-- logo -->
-         <div class="mx-auto text-center space-y-2">
-            <div class="flex justify-center items-center"><img  src="./assets/github-logo.png" alt=""></div>
-            <h2>GitHub Issues Tracker</h2>
-            <p>Sign in to manage your issues</p>
-         </div>
-       <!--login form -->
-       <div class="mx-auto">
-         <fieldset class="fieldset  border-base-300 rounded-box w-xs border p-4">
-  
+    <div class="flex items-center gap-2">
+       <img class="h-8 w-8 object-cover" src="./assets/github-logo.png" alt="">
 
-  <label class="label">Username</label>
-  <input id="login-username" value="admin" type="text" class="input" placeholder="Enter Username" />
+    <h2 class="text-2xl font-semibold text-[#1F2937]">GitHub Issues Tracker</h2>
 
-  <label class="label">Password</label>
-  <input id="login-password" value="admin123" type="password" class="input" placeholder="Enter Password" />
+    </div>
 
-  <button id="login-btn" class="btn btn-primary mt-4">Sign In</button>
-</fieldset>
-       </div>
-    </section>
+
+  </div>
+  <div class="flex gap-2">
+    <input type="text" placeholder="Search issues..." class="input input-bordered w-24 md:w-auto" />
+    <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> New Issue</button>
+    <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+    
+  </div>
+</div>
+
+     </section>
+
+     
 
     <!-- js connected -->
-    <script src="./js/index.js"></script>
+    <!-- <script src="./js/index.js"></script> -->
 </body>
 </html>
