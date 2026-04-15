@@ -21,7 +21,7 @@ document.getElementById("login-btn").addEventListener("click",function(){
 
     if(username=="admin"&&password=="admin123"){
         alert("login successfully");
-        window.location.assign("/home.html");
+        window.location.assign("home.html");
     }
 
 
