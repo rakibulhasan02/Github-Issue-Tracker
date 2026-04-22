@@ -11,7 +11,7 @@ const closedTabBtn = document.getElementById("close-btn");
 
 const cardCount = document.getElementById("card-count");
 const loadingSpinner = document.getElementById("loading-spinner");
-const cardDetailModal =document.getElementById("card-detail-modal")
+const cardDetailModal =document.getElementById("card-detail-modal");
 
 const loadAllCard=async()=>{
     const url="https://phi-lab-server.vercel.app/api/v1/lab/issues";
@@ -71,4 +71,71 @@ function displayCard(cards) {
         cardContainer.appendChild(cardDiv);
         // loadingRemove()
     });
+}
+
+
+// open issues
+async function openIssue() {
+    const res=await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+
+    const data=await res.json();
+
+    const allIssues=data.data;
+
+    const filterOpenCard=allIssues.filter(issue=>issue.status=='open');
+    displayCard(filterOpenCard);
+
+    cardCount.textContent=filterOpenCard.length;
+}
+
+// openIssue()
+
+// closed issues
+
+async function closedIssue() {
+    const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+    const data = await res.json();
+    const allIssues = data.data;
+    // console.log(allIssues);
+        const filterClosedCard = allIssues.filter(issue => issue.status == "closed");      
+    displayCard(filterClosedCard);
+    cardCount.textContent = filterClosedCard.length;
+}
+
+// closedIssue() 
+
+
+//toggle tabs button
+// open tab
+openTabBtn.addEventListener('click',()=>{
+
+    cardContainer.innerHTML=' ';
+    openIssue();
+    allTabBtn.classList.remove("btn-primary");
+    closedTabBtn.classList.remove("btn-primary");
+    openTabBtn.classList.add("btn-primary");
+})
+
+
+const togglebtn=(id)=>{
+    cardContainer.innerHTML=' ';
+    const selectedBtn=document.getElementById(id);
+    if(selectedBtn==openTabBtn){
+         allTabBtn.classList.remove("btn-primary");
+    closedTabBtn.classList.remove("btn-primary");
+        openTabBtn.classList.add("btn-primary");
+        openIssue(); 
+    }
+    if(selectedBtn==closedTabBtn){
+         allTabBtn.classList.remove("btn-primary");
+    closedTabBtn.classList.add("btn-primary");
+        openTabBtn.classList.remove("btn-primary");
+        closedIssue(); 
+    }
+   else{
+         allTabBtn.classList.add("btn-primary");
+    closedTabBtn.classList.remove("btn-primary");
+        openTabBtn.classList.remove("btn-primary");
+        loadAllCard(); 
+    }
 }

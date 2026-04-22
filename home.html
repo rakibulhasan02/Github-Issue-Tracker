@@ -42,7 +42,7 @@
   </div>
   <div class="flex gap-2">
     <input type="text" placeholder="Search issues..." class="input input-bordered w-24 md:w-auto" />
-    <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> New Issue</button>
+    <button class="btn btn-primary"><i class="fa-solid fa-plus"></i>search</button>
     <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
     
   </div>
@@ -52,9 +52,9 @@
 
      <section class="container mx-auto mt-10 bg-base-100  shadow-xl rounded-2xl py-5 px-8">
         <div class="space-x-3">
-            <button id="all-btn" class="btn btn-primary btn-xl px-10 py-3">All</button>
-        <button id="open-btn"  class="btn btn-xl px-10 py-3">Open</button>
-        <button id="close-btn" class="btn btn-xl px-10 py-3">Closed</button>
+            <button id="all-btn" onclick="togglebtn('all-btn')" class="btn btn-primary btn-xl px-10 py-3">All</button>
+        <button id="open-btn" onclick="togglebtn('open-btn')" class="btn btn-xl px-10 py-3">Open</button>
+        <button id="close-btn" onclick="togglebtn('close-btn')" class="btn btn-xl px-10 py-3">Closed</button>
         
         </div>
         
