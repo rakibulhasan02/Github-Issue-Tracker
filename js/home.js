@@ -13,6 +13,23 @@ const cardCount = document.getElementById("card-count");
 const loadingSpinner = document.getElementById("loading-spinner");
 const cardDetailModal =document.getElementById("card-detail-modal");
 
+
+//loading spinner
+
+
+const loadingActive=()=>{
+
+    loadingSpinner.classList.remove("hidden");
+    cardContainer.innerHTML=' ';
+    console.log(loadingSpinner);
+}
+
+const loadingRemove=()=>{
+    loadingSpinner.classList.add("hidden");
+    
+    console.log(loadingSpinner);
+}
+
 const loadAllCard=async()=>{
     const url="https://phi-lab-server.vercel.app/api/v1/lab/issues";
     const res=await fetch(url);
@@ -25,8 +42,8 @@ loadAllCard();
 
 function displayCard(cards) {
     console.log(cards);
-    // loadingActive()
-    cardContainer.innerHTML = "";
+    loadingActive();
+    cardContainer.innerHTML = " ";
 
     cards.forEach(card => {
 
@@ -69,7 +86,7 @@ function displayCard(cards) {
         `
         cardCount.textContent = cards.length;
         cardContainer.appendChild(cardDiv);
-        // loadingRemove()
+        loadingRemove();
     });
 }
 
@@ -121,22 +138,31 @@ const togglebtn=(id)=>{
     cardContainer.innerHTML=' ';
     const selectedBtn=document.getElementById(id);
     if(selectedBtn==openTabBtn){
+        loadingActive();
          allTabBtn.classList.remove("btn-primary");
     closedTabBtn.classList.remove("btn-primary");
         openTabBtn.classList.add("btn-primary");
         openIssue(); 
+        loadingRemove();
     }
     if(selectedBtn==closedTabBtn){
+
+        loadingActive();
          allTabBtn.classList.remove("btn-primary");
     closedTabBtn.classList.add("btn-primary");
         openTabBtn.classList.remove("btn-primary");
         closedIssue(); 
+        loadingRemove();
     }
    else{
+        loadingActive();
+
          allTabBtn.classList.add("btn-primary");
     closedTabBtn.classList.remove("btn-primary");
         openTabBtn.classList.remove("btn-primary");
         loadAllCard(); 
+        loadingRemove();
+
     }
 }
 
@@ -214,3 +240,22 @@ const openModal = async (id) => {
 
     cardDetailModal.showModal();
 };
+
+
+
+document.getElementById('search-btn').addEventListener("click", () => {
+    const searchInput = document.getElementById("search-input");
+    const searchValue = searchInput.value.trim();
+
+    if (!searchValue) {
+        alert("Please enter something to search");
+        return;
+    }
+
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+        .then(res => res.json())
+        .then(data => {
+            displayCard(data.data);
+            cardCount.textContent = data.data.length;//count the search result
+        });
+});
